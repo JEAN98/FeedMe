@@ -24,9 +24,10 @@ namespace FeedMeApi.Controllers
 
         // GET: api/FeedBacks/5
         [ResponseType(typeof(FeedBack))]
-        public IHttpActionResult GetFeedBack(int id)
+        public IHttpActionResult GetFeedBack(string star,string end,int id)
         {
-            FeedBack feedBack = db.FeedBacks.Find(id);
+            GraphBy0(star, end, id);
+             FeedBack feedBack = db.FeedBacks.Find(id);
             if (feedBack == null)
             {
                 return NotFound();

@@ -24,9 +24,9 @@ namespace FeedMeApi.Controllers
 
         // GET: api/Coupons/5
         [ResponseType(typeof(Coupon))]
-        public IHttpActionResult GetCoupon(string email, int storeId, int id)
+        public IHttpActionResult GetCoupon(int id)
         {
-                ExchangeCoupon(email, storeId);
+            DeactivateCoupon();
             Coupon coupon = db.Coupons.Find(id);
             if (coupon == null)
             {
@@ -125,33 +125,38 @@ namespace FeedMeApi.Controllers
                 var amount = Convert.ToInt32(cuopon.Amount);
                 var caseSwitch = Convert.ToInt32(cuopon.PeriodId);
 
-                switch (caseSwitch)
+                if (cuopon.ActivationStatus == 1)
                 {
-                    //1= horas , 2=días, 3=Semanas,4=Meses
-                    case 1:
-                        if (createDateTime.AddHours(amount) > DateTime.Today)
-                        {
-                            return true;
-                        }
-                        break;
-                    case 2:
-                        if (createDateTime.AddDays(amount) > DateTime.Today)
-                        {
-                            return true;
-                        }
-                        break;
-                    case 3:
-                        if (createDateTime.AddDays(amount * 7) > DateTime.Today)
-                        {
-                            return true;
-                        }
-                        break;
-                    case 4:
-                        if (createDateTime.AddMonths(amount) > DateTime.Today)
-                        {
-                            return true;
-                        }
-                        break;
+                    switch (caseSwitch)
+                    {
+                        //1= horas , 2=días, 3=Semanas,4=Meses
+                        case 1:
+                            if (createDateTime.AddHours(amount) < DateTime.Today)
+                            {
+                                cuopon.ActivationStatus = 0;
+                                PutCoupon(cuopon.CouponId, cuopon);
+                                return true;
+                            }
+                            break;
+                        case 2:
+                            if (createDateTime.AddDays(amount) < DateTime.Today)
+                            {
+                                return true;
+                            }
+                            break;
+                        case 3:
+                            if (createDateTime.AddDays(amount*7) < DateTime.Today)
+                            {
+                                return true;
+                            }
+                            break;
+                        case 4:
+                            if (createDateTime.AddMonths(amount) < DateTime.Today)
+                            {
+                                return true;
+                            }
+                            break;
+                    }
                 }
             }
             return false;
