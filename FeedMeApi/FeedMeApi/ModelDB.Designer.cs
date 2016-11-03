@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\JeanCarlo\Documents\MEGA\Cursos\Visual Studio\FeedMeApi\FeedMeApi\ModelDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\JeanCarlo\Documents\GitHub\FeedMe\FeedMeApi\FeedMeApi\ModelDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
