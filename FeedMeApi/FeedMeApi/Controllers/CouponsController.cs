@@ -117,8 +117,9 @@ namespace FeedMeApi.Controllers
         }
 
         //Desactiva los cupones que ya han caducado 
-        public bool DeactivateCoupon()
+        public int DeactivateCoupon()
         {
+           var count=0;
             foreach (var cuopon in GetCoupons())
             {
                 DateTime createDateTime = Convert.ToDateTime(cuopon.CreateDateTime);
@@ -135,7 +136,7 @@ namespace FeedMeApi.Controllers
                             {
                                 cuopon.ActivationStatus = 0;
                                 PutCoupon(cuopon.CouponId, cuopon);
-                                return true;
+                                count++;
                             }
                             break;
                         case 2:
@@ -143,7 +144,7 @@ namespace FeedMeApi.Controllers
                             {
                                 cuopon.ActivationStatus = 0;
                                 PutCoupon(cuopon.CouponId, cuopon);
-                                return true;
+                                count++;
                             }
                             break;
                         case 3:
@@ -151,7 +152,7 @@ namespace FeedMeApi.Controllers
                             {
                                 cuopon.ActivationStatus = 0;
                                 PutCoupon(cuopon.CouponId, cuopon);
-                                return true;
+                                count++;
                             }
                             break;
                         case 4:
@@ -159,13 +160,13 @@ namespace FeedMeApi.Controllers
                             {
                                 cuopon.ActivationStatus = 0;
                                 PutCoupon(cuopon.CouponId, cuopon);
-                                return true;
+                                count++;
                             }
-                            break;
+                         break;
                     }
                 }
             }
-            return false;
+            return count;
         }
         public bool GetCouponsByUserStatusActive(int userId)
         {
