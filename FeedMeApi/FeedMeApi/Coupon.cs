@@ -11,8 +11,7 @@ namespace FeedMeApi
 {
     using System;
     using System.Collections.Generic;
-
-    //[Serializable]
+    
     public partial class Coupon
     {
         public int CouponId { get; set; }
