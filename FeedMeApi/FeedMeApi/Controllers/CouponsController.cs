@@ -1,0 +1,241 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Description;
+using FeedMeApi;
+
+namespace FeedMeApi.Controllers
+{
+    public class CouponsController : ApiController
+    {
+        private FeedMeEntities db = new FeedMeEntities();
+
+        // GET: api/Coupons
+        public IQueryable<Coupon> GetCoupons()
+        {
+            return db.Coupons;
+        }
+
+        // GET: api/Coupons/5
+        [ResponseType(typeof(Coupon))]
+        public IHttpActionResult GetCoupon(string email, int storeId, int id)
+        {
+                ExchangeCoupon(email, storeId);
+            Coupon coupon = db.Coupons.Find(id);
+            if (coupon == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(coupon);
+        }
+
+        // PUT: api/Coupons/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutCoupon(int id, Coupon coupon)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != coupon.CouponId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(coupon).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CouponExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/Coupons
+        [ResponseType(typeof(Coupon))]
+        public IHttpActionResult PostCoupon(Coupon coupon)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Coupons.Add(coupon);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = coupon.CouponId }, coupon);
+        }
+
+        // DELETE: api/Coupons/5
+        [ResponseType(typeof(Coupon))]
+        public IHttpActionResult DeleteCoupon(int id)
+        {
+            Coupon coupon = db.Coupons.Find(id);
+            if (coupon == null)
+            {
+                return NotFound();
+            }
+
+            db.Coupons.Remove(coupon);
+            db.SaveChanges();
+
+            return Ok(coupon);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool CouponExists(int id)
+        {
+            return db.Coupons.Count(e => e.CouponId == id) > 0;
+        }
+
+        //Desactiva los cupones que ya han caducado 
+        public bool DeactivateCoupon()
+        {
+            foreach (var cuopon in GetCoupons())
+            {
+                DateTime createDateTime = Convert.ToDateTime(cuopon.CreateDateTime);
+                var amount = Convert.ToInt32(cuopon.Amount);
+                var caseSwitch = Convert.ToInt32(cuopon.PeriodId);
+
+                switch (caseSwitch)
+                {
+                    //1= horas , 2=días, 3=Semanas,4=Meses
+                    case 1:
+                        if (createDateTime.AddHours(amount) > DateTime.Today)
+                        {
+                            return true;
+                        }
+                        break;
+                    case 2:
+                        if (createDateTime.AddDays(amount) > DateTime.Today)
+                        {
+                            return true;
+                        }
+                        break;
+                    case 3:
+                        if (createDateTime.AddDays(amount * 7) > DateTime.Today)
+                        {
+                            return true;
+                        }
+                        break;
+                    case 4:
+                        if (createDateTime.AddMonths(amount) > DateTime.Today)
+                        {
+                            return true;
+                        }
+                        break;
+                }
+            }
+            return false;
+        }
+        public bool GetCouponsByUserStatusActive(int userId)
+        {
+            foreach (var cuopons in GetCoupons())
+            {
+                if (cuopons.UserId==userId)
+                {
+                    if (cuopons.ActivationStatus == 1)
+                        return true;
+                    break;
+                }
+            }
+            return false; 
+        }
+        public bool ExchangeCoupon(string email, int storeId)
+        {
+            //El var detecta la clase o objeto y lo genera automaticamente
+            var usercinController = new UsersController();
+            var coupon = new Coupon();
+            var store = db.Stores.Find(storeId);
+            var user = new User();
+            try
+            {
+                //obtiene el usuario  a través del email que ya existe en la base de datos o que no existe para guardarlo
+                if (usercinController.EmailReview(email) == null)
+                {
+                    if (store == null)
+                    {
+                        throw new InvalidOperationException("You must to insert a Store information does not exist");
+                    }
+                    user.Email = email;
+                    user.StoreId = storeId;
+                    user.RoleId = 1;
+                    user.Passwordkey = "000";
+
+                    usercinController.InsertingUser(user); //Lo inserta en la base de datos
+
+                    coupon.Email = user.Email;
+                    coupon.UserId = user.UserId;
+                    coupon.StoreId = store.StoreId;
+                    coupon.Discount = store.Discount;
+                    coupon.ActivationStatus = 1;
+                    coupon.DiscountDescription = store.ProductDescription;
+                    coupon.PeriodId = store.PeriodId;
+                    coupon.CreateDateTime = DateTime.Today;
+                    coupon.Amount = store.Amount;
+
+                    PostCoupon(coupon); //Asigna un copon para el usuario
+                    return true;
+                }
+                user = usercinController.EmailReview(email);
+                if (GetCouponsByUserStatusActive(user.UserId) == false) //Verifca si tiene cupones activos
+                {
+                    //Si no tiene ningún cupón activo
+                    coupon.Email = user.Email;
+                    coupon.UserId = user.UserId;
+                    coupon.StoreId = store.StoreId;
+                    coupon.Discount = store.Discount;
+                    coupon.ActivationStatus = 1;
+                    coupon.DiscountDescription = store.ProductDescription;
+                    coupon.PeriodId = store.PeriodId;
+                    coupon.CreateDateTime = DateTime.Today;
+                    coupon.Amount = store.Amount;
+                    PostCoupon(coupon); //Asigna el copon para el usuario
+                    return true;
+                }
+                //Sino es porque ya tiene algún cupón activo
+            }
+            catch (Exception exception)
+            {
+                throw new System.InvalidOperationException("" + exception);
+            }
+            return false;
+        }
+        //Obtiene todos los cupones segun el storeId
+        public List<Coupon> GetAllCuponByStore(int storeId)
+        {
+            return db.Coupons
+                .Where(x => x.StoreId == storeId).ToList();
+        }
+        
+
+    }
+}
