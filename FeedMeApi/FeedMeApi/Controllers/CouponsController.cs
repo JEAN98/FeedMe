@@ -141,18 +141,24 @@ namespace FeedMeApi.Controllers
                         case 2:
                             if (createDateTime.AddDays(amount) < DateTime.Today)
                             {
+                                cuopon.ActivationStatus = 0;
+                                PutCoupon(cuopon.CouponId, cuopon);
                                 return true;
                             }
                             break;
                         case 3:
                             if (createDateTime.AddDays(amount*7) < DateTime.Today)
                             {
+                                cuopon.ActivationStatus = 0;
+                                PutCoupon(cuopon.CouponId, cuopon);
                                 return true;
                             }
                             break;
                         case 4:
                             if (createDateTime.AddMonths(amount) < DateTime.Today)
                             {
+                                cuopon.ActivationStatus = 0;
+                                PutCoupon(cuopon.CouponId, cuopon);
                                 return true;
                             }
                             break;
