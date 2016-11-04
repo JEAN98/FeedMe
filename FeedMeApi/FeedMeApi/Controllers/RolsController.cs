@@ -12,6 +12,7 @@ using FeedMeApi;
 
 namespace FeedMeApi.Controllers
 {
+
     public class RolsController : ApiController
     {
         private FeedMeEntities db = new FeedMeEntities();

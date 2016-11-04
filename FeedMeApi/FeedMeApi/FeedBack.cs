@@ -11,7 +11,9 @@ namespace FeedMeApi
 {
     using System;
     using System.Collections.Generic;
-    
+
+    //Conecta al Json y así envía la info
+    [Serializable]
     public partial class FeedBack
     {
         public int FeedBackId { get; set; }

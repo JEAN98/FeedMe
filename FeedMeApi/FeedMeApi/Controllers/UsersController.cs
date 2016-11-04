@@ -27,6 +27,7 @@ namespace FeedMeApi.Controllers
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
+            GetUsers();
             User user = db.Users.Find(id);
             if (user == null)
             {
