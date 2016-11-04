@@ -270,7 +270,10 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FeedBacksModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\StoresModel.cs" />
+    <Compile Include="Models\UsersModel.cs" />
     <Compile Include="PeriodType.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
