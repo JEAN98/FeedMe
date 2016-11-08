@@ -7,12 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
+
 namespace FeedMeApi
 {
     using System;
     using System.Collections.Generic;
 
     [Serializable]
+    [DataContract]
     public partial class PeriodType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,14 +24,19 @@ namespace FeedMeApi
             this.Coupons = new HashSet<Coupon>();
             this.Stores = new HashSet<Store>();
         }
-    
+        [DataMember]
         public int PeriodId { get; set; }
+        [DataMember]
         public string PeriodName { get; set; }
+        [DataMember]
         public Nullable<int> Number { get; set; }
-    
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DataMember]
         public virtual ICollection<Coupon> Coupons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DataMember]
         public virtual ICollection<Store> Stores { get; set; }
     }
 }

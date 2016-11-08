@@ -7,13 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
+
 namespace FeedMeApi
 {
     using System;
     using System.Collections.Generic;
     
     [Serializable]
-    public partial class Store
+    [DataContract]
+    public class Store
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Store()
@@ -22,14 +25,21 @@ namespace FeedMeApi
             this.FeedBacks = new HashSet<FeedBack>();
             this.Users = new HashSet<User>();
         }
-    
+        [DataMember]
         public int StoreId { get; set; }
+        [DataMember]
         public string UrlName { get; set; }
+        [DataMember]
         public string CodName { get; set; }
+        [DataMember]
         public Nullable<int> Discount { get; set; }
+        [DataMember]
         public Nullable<int> Amount { get; set; }
+        [DataMember]
         public Nullable<double> Percentage { get; set; }
+        [DataMember]
         public string ProductDescription { get; set; }
+        [DataMember]
         public Nullable<int> PeriodId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

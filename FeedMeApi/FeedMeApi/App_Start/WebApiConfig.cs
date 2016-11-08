@@ -22,7 +22,7 @@ namespace FeedMeApi
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "services/{controller}/{id}",//uno puedo omitir la palabra api o cambiarla por service
                 defaults: new { id = RouteParameter.Optional }
             );
         }

@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
+
 namespace FeedMeApi
 {
     using System;
@@ -15,19 +17,31 @@ namespace FeedMeApi
     [Serializable]
     public partial class Coupon
     {
+        [DataMember]
         public int CouponId { get; set; }
+        [DataMember]
         public Nullable<int> Discount { get; set; }
+        [DataMember]
         public string DiscountDescription { get; set; }
+        [DataMember]
         public Nullable<int> ActivationStatus { get; set; }
+        [DataMember]
         public Nullable<int> UserId { get; set; }
+        [DataMember]
         public string Email { get; set; }
+        [DataMember]
         public Nullable<int> Amount { get; set; }
+        [DataMember]
         public Nullable<System.DateTime> CreateDateTime { get; set; }
+        [DataMember]
         public Nullable<int> StoreId { get; set; }
+        [DataMember]
         public Nullable<int> PeriodId { get; set; }
-    
+        [DataMember]
         public virtual PeriodType PeriodType { get; set; }
+        [DataMember]
         public virtual Store Store { get; set; }
+        [DataMember]
         public virtual User User { get; set; }
     }
 }

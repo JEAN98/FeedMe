@@ -29,6 +29,7 @@ namespace FeedMeApi.Controllers
         [ResponseType(typeof(Store))]
         public IHttpActionResult GetStore(int id)
         {
+            
             Store store = db.Stores.Find(id);
             if (store == null)
             {
@@ -70,12 +71,12 @@ namespace FeedMeApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(); //StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Stores
         [ResponseType(typeof(Store))]
-        public IHttpActionResult PostStore(Store store)
+        public IHttpActionResult PostStores(Store store)
         {
             if (!ModelState.IsValid)
             {

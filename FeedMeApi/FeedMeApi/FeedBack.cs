@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
+
 namespace FeedMeApi
 {
     using System;
@@ -14,14 +16,20 @@ namespace FeedMeApi
 
     //Conecta al Json y así envía la info
     [Serializable]
+    [DataContract]
     public partial class FeedBack
     {
+        [DataMember]
         public int FeedBackId { get; set; }
+        [DataMember]
         public Nullable<int> StoreId { get; set; }
+        [DataMember]
         public Nullable<int> Face { get; set; }
+        [DataMember]
         public string Opinion { get; set; }
+        [DataMember]
         public Nullable<System.DateTime> CreationDate { get; set; }
-    
+        [DataMember]
         public virtual Store Store { get; set; }
     }
 }

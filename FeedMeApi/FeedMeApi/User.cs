@@ -7,12 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
+
 namespace FeedMeApi
 {
     using System;
     using System.Collections.Generic;
 
     [Serializable]
+    [DataContract]
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +23,17 @@ namespace FeedMeApi
         {
             this.Coupons = new HashSet<Coupon>();
         }
-    
+        [DataMember]
         public int UserId { get; set; }
+        [DataMember]
         public string Email { get; set; }
+        [DataMember]
         public string Passwordkey { get; set; }
+        [DataMember]
         public Nullable<int> RoleId { get; set; }
+        [DataMember]
         public Nullable<int> StoreId { get; set; }
-    
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Coupon> Coupons { get; set; }
         public virtual Rol Rol { get; set; }
