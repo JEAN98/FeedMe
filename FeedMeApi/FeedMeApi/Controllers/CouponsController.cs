@@ -26,7 +26,7 @@ namespace FeedMeApi.Controllers
         [ResponseType(typeof(Coupon))]
         public IHttpActionResult GetCoupon(int id)
         {
-            DeactivateCoupon();
+          
             Coupon coupon = db.Coupons.Find(id);
             if (coupon == null)
             {
