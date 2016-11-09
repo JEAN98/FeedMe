@@ -15,6 +15,7 @@ namespace FeedMeApi
     using System.Collections.Generic;
 
     [Serializable]
+    
     public partial class Coupon
     {
         [DataMember]

@@ -274,10 +274,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\FeedBacksModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\StoresModel.cs" />
-    <Compile Include="Models\UsersModel.cs" />
     <Compile Include="PeriodType.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -296,6 +293,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.js" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="Index.html" />
     <Content Include="Scripts\angular-animate.js" />
@@ -348,6 +346,7 @@
     </Content>
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="Scripts\LandingPageController.js" />
     <Content Include="Scripts\Other scripts\app1.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1149,6 +1148,8 @@
     <Content Include="Scripts\Other scripts\test.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\FeedMeViews\LoginView.html" />
+    <Content Include="Views\HtmlPage1.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1166,10 +1167,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\FeedMeViews\LoginView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\FeedMeViews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
