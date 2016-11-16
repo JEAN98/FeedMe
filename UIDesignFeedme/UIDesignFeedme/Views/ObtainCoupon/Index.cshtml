@@ -1,0 +1,89 @@
+﻿@model UIDesignFeedme.Models.ObtainCoupon
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 align=center><MARQUEE behavior=scroll direction=left bgcolor=white width=60%> <FONT color=red size=14 face="Comic Sans MS">Do you want to win a coupon?</FONT></MARQUEE></h2>
+<head>
+    <style type="text/css">
+        h2 {
+            font-weight: inherit;
+    </style>
+</head>
+
+<body>
+
+</body>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <center>
+        <div class="form-horizontal">
+            <h4>Obtain a Coupon</h4>
+            <hr />
+
+
+
+            <center>
+                <img src="~/FeedmePictures/ticket.png" width="100" height="100"//>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </center>
+            <p style="text-align:center;">IN</p>
+            <p style="text-align:center;">Pollos y papa</p>
+            <p style="text-align:center;">
+                <FONT color=black size=5 face="Arial">
+                    If you want a coupon, fill the next space with your address
+                    email and then send it to us, after you can go to our
+                    establishment to claim the coupon, from you take your coupon
+                    you'll have a date to redeem your coupon, during this date
+                    you can´t participate for other coupon.
+                </FONT>
+            </p>
+
+
+            @*<div class="form-group">
+
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>*@
+
+
+         
+                @*<div class="form-group">*@
+
+                    @*<div class="col-md-offset-2 col-md-10">*@
+
+                        <div class="form-group">
+                            <div>
+                                <label for="email">Email address:</label>
+                                <input type="email" class="form-control" id="email">
+                                <button type="submit" class="btn btn-info">SEND</button>
+                            </div> 
+                            <img src="~/FeedmePictures/maillogo.png" width="100" height="100" align=right />
+                        </div>
+          
+                       
+                    @*</div>*@
+
+                @*</div>*@
+          
+        </div>
+    </center>
+}
+<center>
+
+    <div>
+        @Html.ActionLink("Back", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</center>

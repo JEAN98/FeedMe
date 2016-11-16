@@ -239,6 +239,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="ClasesDTO\FeedBackDTO.cs" />
+    <Compile Include="ClasesDTO\PeriodTypeDTO.cs" />
+    <Compile Include="ClasesDTO\RolsDTO.cs" />
+    <Compile Include="ClasesDTO\UsersDTO.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CouponsController.cs" />
     <Compile Include="Controllers\FeedBacksController.cs" />

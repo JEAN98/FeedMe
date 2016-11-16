@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChangeCouponController.cs" />
+    <Compile Include="Controllers\ObtainCouponController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -204,12 +205,15 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChangeCoupon.cs" />
+    <Compile Include="Models\ObtainCoupon.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FeedmePictures\calendar.png" />
+    <Content Include="FeedmePictures\maillogo.png" />
     <Content Include="FeedmePictures\ticket.png" />
     <Content Include="FeedMeViews\ChangeCoupon.html" />
     <Content Include="Content\bootstrap.css" />
@@ -248,7 +252,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -271,12 +274,15 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ChangeCoupon\Index.cshtml" />
+    <Content Include="Views\ObtainCoupon\Index.cshtml" />
+    <Content Include="Views\ObtainCoupon\ChangeCoupon.cshtml" />
+    <Content Include="Views\Home\ChangeCoupon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="css\" />
     <Folder Include="js\" />
+    <Folder Include="Views\ChangeCoupon\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
